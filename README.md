@@ -1,5 +1,6 @@
 # AI Assignment - Chatbot
 ## 2025-12-14 Submit
+<h3>Click <a href="QUESTION.md">HERE</a> for question requirement</h3>
 
 ### How to open this project
 1. Download this project
@@ -9,68 +10,40 @@
 https://docs.google.com/document/d/1WS0LGiR7hrceA38k9jtDs2pStxVTjxA3/edit?usp=sharing&ouid=118013344239763753061&rtpof=true&sd=true
 
 ### Intents
-- greet
-- ask_room-type
-- ask_room_price
-- ask_room_availability
-- ask_facilities (wifi, breakfast, pool, parking)
-- ask_where_to_visit (local attractions)
-- ask_checkin_datetime
-- ask_checkout_datetime
-- ask_booking_process
-- ask_cancellation_policy
-- request_admin_contact
+#### 25 intents from Bitext's dataset
+- invoices
+- cancellation_fees
+- check_in
+- check_out
+- customer_service
+- human_agent
+- host_event
+- file_complaint
+- leave_review
+- book_hotel
+- cancel_hotel_reservation
+- change_hotel_reservation
+- check_hotel_facilities
+- check_hotel_offers
+- check_hotel_prices
+- check_hotel_reservation
+- search_hotel
+- store_luggage
+- check_menu
+- add_night
+- book_parking_space
+- bring_pets
+- redeem_points
+- get_refund
+- shuttle_service
+#### 10 new custom intents
+- greeting
+- check_functions
+- check_room_type
+- check_room_availability
+- check_nearby_attractions
+- check_child_policy
+- check_smoking_policy
+- check_payment_methods
+- check_lost_item
 - goodbye
-
-## Assignment Requirements
-
-### a. Real-Life Scenario
-Develop a chatbot for a hotel booking and customer support system that handles:
-- Room inquiries and availability
-- Booking management
-- Facility information
-- Guest support
-
-### b. Background Study
-- Research NLP technologies and chatbot platforms
-- Explore: Google Dialogflow, Rasa, Pandorabots, Botpress
-- Analyze capabilities and limitations
-
-### c. Development Approach
-Choose one:
-- **Option 1**: Machine Learning (NLP-based intent recognition)
-- **Option 2**: Platform-based (Dialogflow, Rasa, or similar)
-
-### d. Chatbot Functionalities
-- Answer FAQs about rooms and facilities
-- Process booking requests
-- Provide local attraction recommendations
-- Handle check-in/check-out inquiries
-- Manage cancellation policies
-
-### e. Implementation Tasks
-**For ML-based:**
-- Collect and preprocess training data
-- Train NLP model for intent classification
-- Generate contextual responses
-
-**For Platform-based:**
-- Configure intents and entities
-- Set up response flows
-- Integrate external APIs
-
-### f. Testing
-Evaluate performance on:
-- Intent recognition accuracy
-- Response relevancy
-- User satisfaction
-
-### g. Evaluation Metrics
-- Precision, Recall, F1 Score
-- BLEU/ROUGE scores
-- User satisfaction ratings
-
-### h. Resources
-- https://www.pandorabots.com/
-- https://www.ibm.com/watson/how-to-build-a-chatbot/
-- https://www.kaggle.com/code/melkmanszoon/building-a-chatbot 
