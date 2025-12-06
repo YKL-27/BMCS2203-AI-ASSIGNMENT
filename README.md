@@ -6,11 +6,14 @@
 1. Download this project
 2. Go to terminal, enter <code>pip install -r requirements.txt</code>
 
+### Python version
+3.12.8
+
 ### Report
 https://docs.google.com/document/d/1WS0LGiR7hrceA38k9jtDs2pStxVTjxA3/edit?usp=sharing&ouid=118013344239763753061&rtpof=true&sd=true
 
 ### Intents
-#### 25 intents from Bitext's dataset
+#### 25 intents from dataset retrieved online
 - invoices
 - cancellation_fees
 - check_in
