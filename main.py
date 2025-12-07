@@ -9,12 +9,20 @@ INTENT_VECTORIZER_PATH = os.path.join(BASE_DIR, "joblib", "intent_vectorizer.job
 RESPONSES_PATH = os.path.join(BASE_DIR, "data", "responses.json")
 
 # Load model + vectorizer
-model = joblib.load(INTENT_MODEL_PATH)
-vectorizer = joblib.load(INTENT_VECTORIZER_PATH)
+try:
+    model = joblib.load(INTENT_MODEL_PATH)
+    vectorizer = joblib.load(INTENT_VECTORIZER_PATH)
+except FileNotFoundError:
+    st.error("Model or vectorizer file not found.")
+    st.stop()
 
 # Load responses
-with open(RESPONSES_PATH, "r") as f:
-    responses = json.load(f)
+try:
+    with open(RESPONSES_PATH, "r") as f:
+        responses = json.load(f)
+except FileNotFoundError:
+    st.error("Responses file not found.")
+    st.stop()
 
 def chatbot_reply(user_input):
     user_input = user_input.lower()
@@ -27,39 +35,32 @@ def chatbot_reply(user_input):
 
 # Streamlit app
 def main():
-    st.set_page_config(page_title="Intent Chatbot", page_icon="🤖")
+    st.title("Chatbot Interface")
+    st.caption("Ask me about room prices, check-in times, or facilities!")
 
-    st.title("🤖 Intent Recognition Chatbot")
-
-    # Keep conversation state
+    # initialize session state
     if "messages" not in st.session_state:
-        st.session_state.messages = []
+        st.session_state.messages = [{"role": "assistant", "content": "Hello! How can I help you with your hotel booking today?"}]
 
-    # Render chat history
+    # display chat history
     for msg in st.session_state.messages:
-        if msg["role"] == "user":
-            st.markdown(f"**You:** {msg['text']}")
-        else:
-            st.markdown(f"**Chatbot:** {msg['text']}")
+        with st.chat_message(msg["role"]):
+            st.markdown(msg["content"])
 
-    # User input
-    user_input = st.text_input("Type your message:")
+    # handle user input
+    if prompt := st.chat_input("Type your message here..."):
+        # display user message
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
 
-    if st.button("Send") and user_input.strip() != "":
-        # Add user message
-        st.session_state.messages.append({"role": "user", "text": user_input})
+        intent, reply = chatbot_reply(prompt)
 
-        # Generate reply
-        reply = chatbot_reply(user_input)
-        st.session_state.messages.append({"role": "bot", "text": reply})
-
-        # Force app to rerun
-        st.experimental_rerun()
-
-    # Reset chat
-    if st.button("Clear Chat"):
-        st.session_state.messages = []
-        st.experimental_rerun()
-
+        # display chatbot reply
+        st.session_state.messages.append({"role": "assistant", "content": reply})
+        with st.chat_message("assistant"):
+            st.markdown(reply)
+    
+    
 if __name__ == '__main__':
     main()
