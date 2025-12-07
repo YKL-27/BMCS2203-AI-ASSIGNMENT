@@ -1,61 +1,59 @@
-import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import classification_report, accuracy_score
+import json
+import joblib
+import streamlit as st
 
-df = pd.read_csv('dataset/bitext-hospitality-llm-chatbot-training-dataset.csv')
+# Load model + vectorizer
+model = joblib.load("intent_model.joblib")
+vectorizer = joblib.load("intent_vectorizer.joblib")
 
-# convert to lowercase
-df['instruction'] = df['instruction'].str.lower()
-
-# shuffle data
-df = df.sample(frac=1).reset_index(drop=True)
-
-vectorizer = TfidfVectorizer()
-X = vectorizer.fit_transform(df['instruction'])
-y = df['intent']
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
-
-model = LogisticRegression(max_iter=1000)
-model.fit(X_train, y_train)
-
-pred = model.predict(X_test)
-
-print("Accuracy:", accuracy_score(y_test, pred))
-print("\nClassification Report:\n")
-print(classification_report(y_test, pred))
-
-responses = {
-    "ask_room_price": "Our rooms start from RM180 per night.",
-    "ask_availability": "We currently have several rooms available.",
-    "ask_facilities": "We offer free WiFi, breakfast, pool, gym, and parking.",
-    "ask_location": "We are located in Kuala Lumpur City Centre.",
-    "ask_checkin_time": "Check-in time is from 2:00 PM.",
-    "ask_checkout_time": "Check-out time is at 12:00 PM.",
-    "ask_booking": "You can book directly through our website or at the front desk.",
-    "ask_cancellation": "Cancellations are free up to 24 hours before arrival.",
-    "greeting": "Hello! How may I assist you today?",
-    "goodbye": "Goodbye! Have a great day!",
-}
+# Load responses
+with open("dataset/responses.json", "r") as f:
+    responses = json.load(f)
 
 def chatbot_reply(user_input):
     user_input = user_input.lower()
-    vector = vectorizer.transform([user_input])
-    intent = model.predict(vector)[0]
-    return intent
+    vec = vectorizer.transform([user_input])
+    intent = model.predict(vec)[0]
+    response = responses.get(intent, responses.get("unknown_intent"))
+    if isinstance(response, list):
+        response = response[0]
+    return response
 
-# Test
-prompt = ""
-while prompt.lower() != "exit":
-    prompt = input("You: ")
-    if prompt.lower() == "exit":
-        print("Chatbot: Goodbye! Have a great day!")
-        break
-    intent = chatbot_reply(prompt)
-    response = responses.get(intent, "I'm sorry, I don't understand your question.")
-    print("Chatbot:", response)
+# Streamlit app
+def main():
+    st.set_page_config(page_title="Intent Chatbot", page_icon="🤖")
+
+    st.title("🤖 Intent Recognition Chatbot")
+
+    # Keep conversation state
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+
+    # Render chat history
+    for msg in st.session_state.messages:
+        if msg["role"] == "user":
+            st.markdown(f"**You:** {msg['text']}")
+        else:
+            st.markdown(f"**Chatbot:** {msg['text']}")
+
+    # User input
+    user_input = st.text_input("Type your message:")
+
+    if st.button("Send") and user_input.strip() != "":
+        # Add user message
+        st.session_state.messages.append({"role": "user", "text": user_input})
+
+        # Generate reply
+        reply = chatbot_reply(user_input)
+        st.session_state.messages.append({"role": "bot", "text": reply})
+
+        # Force app to rerun
+        st.experimental_rerun()
+
+    # Reset chat
+    if st.button("Clear Chat"):
+        st.session_state.messages = []
+        st.experimental_rerun()
+
+if __name__ == '__main__':
+    main()
