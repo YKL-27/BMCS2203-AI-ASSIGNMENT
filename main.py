@@ -40,7 +40,7 @@ def main():
 
     # initialize session state
     if "messages" not in st.session_state:
-        st.session_state.messages = [{"role": "assistant", "content": "Hello! How can I help you with your hotel booking today?"}]
+        st.session_state.messages = [{"role": "bot", "content": "Hello! How can I help you with your hotel booking today?"}]
 
     # display chat history
     for msg in st.session_state.messages:
@@ -54,12 +54,12 @@ def main():
         with st.chat_message("user"):
             st.markdown(prompt)
 
-        intent, reply = chatbot_reply(prompt)
+        responses = chatbot_reply(prompt)
 
         # display chatbot reply
-        st.session_state.messages.append({"role": "assistant", "content": reply})
-        with st.chat_message("assistant"):
-            st.markdown(reply)
+        st.session_state.messages.append({"role": "bot", "content": responses})
+        with st.chat_message("bot"):
+            st.markdown(responses)
     
     
 if __name__ == '__main__':
