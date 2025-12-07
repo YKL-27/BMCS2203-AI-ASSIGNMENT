@@ -4,8 +4,8 @@ import os
 import streamlit as st
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-INTENT_MODEL_PATH = os.path.join(BASE_DIR, "main", "intent_model.joblib")
-INTENT_VECTORIZER_PATH = os.path.join(BASE_DIR, "main", "intent_vectorizer.joblib")
+INTENT_MODEL_PATH = os.path.join(BASE_DIR, "joblib", "intent_model.joblib")
+INTENT_VECTORIZER_PATH = os.path.join(BASE_DIR, "joblib", "intent_vectorizer.joblib")
 RESPONSES_PATH = os.path.join(BASE_DIR, "data", "responses.json")
 
 # Load model + vectorizer
