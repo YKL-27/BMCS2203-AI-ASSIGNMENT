@@ -8,8 +8,8 @@ from sklearn.metrics import classification_report, accuracy_score
 
 #! load both datasets and combine them
 print("Loading datasets...")
-df1 = pd.read_csv('dataset/bitext-hospitality-llm-chatbot-training-dataset.csv')
-df2 = pd.read_csv('dataset/newdataset.csv')
+df1 = pd.read_csv('bitext-hospitality-llm-chatbot-training-dataset.csv')
+df2 = pd.read_csv('newdataset.csv')
 
 df = pd.concat([df1, df2], ignore_index=True)
 print(f"Total records: {len(df)}")
