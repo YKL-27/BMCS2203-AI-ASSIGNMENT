@@ -57,7 +57,7 @@ def chatbot_reply(user_input):
     return {
         "intent": intent,
         "confidence": confidence,
-        "response": response,
+        "response": response.format(**hotel_data),
         "time_ms": elapsed
     }
 
@@ -88,7 +88,7 @@ def main():
         # display chatbot reply
         st.session_state.messages.append({"role": "assistant", "content": responses['response']})
         with st.chat_message("assistant"):
-            st.markdown(responses['response'].format(**hotel_data),)
+            st.markdown(responses['response'])
             st.caption(
                 f"**Predicted Intent:** `{responses['intent']}` | "
                 f"**Confidence:** {responses['confidence']*100:.2f}% | "
