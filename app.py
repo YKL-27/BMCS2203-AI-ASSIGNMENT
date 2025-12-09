@@ -57,8 +57,8 @@ def main():
         responses = chatbot_reply(prompt)
 
         # display chatbot reply
-        st.session_state.messages.append({"role": "bot", "content": responses})
-        with st.chat_message("bot"):
+        st.session_state.messages.append({"role": "assistant", "content": responses})
+        with st.chat_message("assistant"):
             st.markdown(responses)
     
     

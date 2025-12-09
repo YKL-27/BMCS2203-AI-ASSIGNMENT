@@ -1,15 +1,14 @@
 import pandas as pd
-import json
 import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, accuracy_score
 
-#! load both datasets and combine them
+#! load both datasets and combine them into a single dataframe
 print("Loading datasets...")
 df1 = pd.read_csv('data/bitext-hospitality-llm-chatbot-training-dataset.csv')
-df2 = pd.read_csv('data/newdataset.csv')
+df2 = pd.read_csv('data/custom-dataset.csv')
 
 df = pd.concat([df1, df2], ignore_index=True)
 print(f"Total records: {len(df)}")
@@ -20,19 +19,15 @@ print("Preparing data...")
 df['instruction'] = df['instruction'].str.lower()
 # shuffle data
 df = df.sample(frac=1).reset_index(drop=True)
-
 # vectorise: text -> numerical vector
 vectorizer = TfidfVectorizer()
 X = vectorizer.fit_transform(df['instruction'])
 y = df['intent']
 
-#! data training
+#! data training with logistic regression algorithm
 print("Training model...")
 # train-test split: 80% train, 20% test
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
-
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 model = LogisticRegression(max_iter=1000)
 model.fit(X_train, y_train)
 
