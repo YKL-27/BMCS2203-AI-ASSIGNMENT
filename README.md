@@ -2,15 +2,15 @@
 ## 2025-12-14 Submit
 <h3>Click <a href="QUESTION.md">HERE</a> for question requirement</h3>
 
+### Software Requirements
+- Python 3.12.8
+
 ### How to open this project
 1. Download this project
 2. Go to terminal, enter <code>pip install -r requirements.txt</code>
-3. Run training.py to train data stored in 'data' folder
-4. The model and vectoriser file will be automatically stored in 'joblib' folder
-5. The main application ('app.py') is hosted in streamlit
-
-### Python version
-3.12.8
+3. Run training.py to train data stored in 'data' folder, and save joblib files in 'joblib' folder.
+4. Run testing.py to test model locally
+<br>*The streamlit app runs main.py, and uses joblib files stored in GitHub
 
 ### Report
 https://docs.google.com/document/d/1WS0LGiR7hrceA38k9jtDs2pStxVTjxA3/edit?usp=sharing&ouid=118013344239763753061&rtpof=true&sd=true

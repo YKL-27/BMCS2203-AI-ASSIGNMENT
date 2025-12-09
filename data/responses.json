@@ -1,7 +1,6 @@
 {
     "greeting":                     "Welcome to Astra Imperium Hotel. I'm your virtual assistant. How may I assist you today?",
     "check_functions":              "I can help with room reservations, hotel information, facilities, services, and general inquiries.",
-
     "invoices":                     "To request an invoice, please visit the Front Desk or email us at billing@astraimperium.com. Provide your booking reference number for quicker processing.",
     "cancellation_fees":            "Cancellations are free up to 24 hours before your check-in date. Cancellations within 24 hours, or no-shows, will incur a charge equivalent to the first night's stay.",
     "check_in":                     "Check-in begins at 3:00 PM. Early check-in is subject to room availability. Luggage may be stored at the concierge at no additional cost. A refundable security deposit is required during check-in.",
@@ -27,7 +26,6 @@
     "redeem_points":                "If you are an Astra Rewards member, you may redeem points for discounts or complimentary nights. Log in to your member account on our website or visit the Front Desk for assistance.",
     "get_refund":                   "Refunds are processed within 7-14 business days, depending on your payment method. Please contact billing@astragroup.com with your booking reference number.",
     "shuttle_service":              "We provide private airport transfers: RM80 for a sedan and RM120 for a van. Book at least 24 hours in advance via the Front Desk. E-hailing options are also easily available, averaging RM60-70 to KLIA.",
-
     "check_room_type":              "Our room categories include Superior, Deluxe, Premier, Executive Suite, and the Astra Imperial Suite. Each offers different views and amenities to suit your stay.",
     "check_room_availability":      "To check room availability, please visit our website's booking page or contact the Reservations Team with your preferred dates.",
     "check_nearby_attractions":     "Nearby attractions include the Petronas Twin Towers (1 km), Pavilion Bukit Bintang, the National Museum, and Jalan Alor Street Food Market. Complimentary city maps are available at the concierge.",
@@ -36,5 +34,5 @@
     "check_payment_methods":        "We accept cash (MYR), Visa, Mastercard, American Express, and major e-wallets such as GrabPay and Touch 'n Go. A refundable RM100 security deposit is required during check-in.",
     "check_lost_item":              "For lost items, please report immediately to the Front Desk. Our Security Team will review the Lost & Found log and contact you once the item is located.",
     "goodbye":                      "Thank you for choosing Astra Imperium Hotel. We look forward to welcoming you again soon!",
-    "unknown_intent":                "I'm sorry, I don't understand your question."
+    "unknown_intent":               "I'm sorry, I don't understand your question."
 }

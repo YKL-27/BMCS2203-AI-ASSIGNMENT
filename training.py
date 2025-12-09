@@ -1,3 +1,4 @@
+print("Loading datasets...")
 import pandas as pd
 import joblib
 from sklearn.model_selection import train_test_split
@@ -5,16 +6,15 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, accuracy_score
 
-#! load both datasets and combine them into a single dataframe
-print("Loading datasets...")
+#! Load both datasets and concatenate them into a single dataframe
 df1 = pd.read_csv('data/bitext-hospitality-llm-chatbot-training-dataset.csv')
 df2 = pd.read_csv('data/custom-dataset.csv')
-
 df = pd.concat([df1, df2], ignore_index=True)
 print(f"Total records: {len(df)}")
 
+
+#! Data preparation
 print("Preparing data...")
-#! data preparation
 # convert to lowercase
 df['instruction'] = df['instruction'].str.lower()
 # shuffle data
@@ -24,21 +24,21 @@ vectorizer = TfidfVectorizer()
 X = vectorizer.fit_transform(df['instruction'])
 y = df['intent']
 
-#! data training with logistic regression algorithm
+#! Data training with logistic regression algorithm
 print("Training model...")
 # train-test split: 80% train, 20% test
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 model = LogisticRegression(max_iter=1000)
 model.fit(X_train, y_train)
 
-#! model evaluation
+#! Model evaluation
 pred = model.predict(X_test)
 
 print("Accuracy:", accuracy_score(y_test, pred))
 print("\nClassification Report:\n")
 print(classification_report(y_test, pred))
 
-#! save model and vectorizer
+#! Save model and vectorizer
 print("Saving model...")
 joblib.dump(model, "joblib/intent_model.joblib")
 joblib.dump(vectorizer, "joblib/intent_vectorizer.joblib")
