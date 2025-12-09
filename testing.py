@@ -10,12 +10,18 @@ try:
 except FileNotFoundError:
     print("Model or vectorizer file not found.")
 
-#! Load responses
+#! Load json 
 try:
     with open("data/responses.json", "r") as f:
         responses = json.load(f)
 except FileNotFoundError:
     print("Responses file not found.")
+    
+try:
+    with open("data/hotel-data.json", "r") as f:
+        hotel_data = json.load(f)
+except FileNotFoundError:
+    print("Hotel data file not found.")
 
 #! Chatbot reply function
 def chatbot_reply(user_input):
@@ -26,15 +32,22 @@ def chatbot_reply(user_input):
     proba = model.predict_proba(vec)[0]
     confidence = float(np.max(proba))
     response = responses.get(intent, "unknown_intent")
+    
     if isinstance(response, list):
         response = response[0]
     elapsed = round((time.time() - start_time) * 1000, 2)
-    return {
+    try:
+        # .format() auto-fills {placeholders} using data.json
+        return {
         "intent": intent,
         "confidence": confidence,
-        "response": response,
+        "response": response.format(**hotel_data),
         "time_ms": elapsed
     }
+    except KeyError as e:
+        # If a placeholder is missing in data.json, show error clearly
+        return f"[Missing data for: {e.args[0]}]"
+
 
 #! Main chat loop
 print("Chatbot Interface")

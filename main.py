@@ -9,6 +9,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 INTENT_MODEL_PATH = os.path.join(BASE_DIR, "joblib", "intent_model.joblib")
 INTENT_VECTORIZER_PATH = os.path.join(BASE_DIR, "joblib", "intent_vectorizer.joblib")
 RESPONSES_PATH = os.path.join(BASE_DIR, "data", "responses.json")
+HOTEL_DATA_PATH = os.path.join(BASE_DIR, "data", "hotel-data.json")
 
 #! Load model + vectorizer
 try:
@@ -18,12 +19,19 @@ except FileNotFoundError:
     st.error("Model or vectorizer file not found.")
     st.stop()
 
-#! Load responses
+#! Load json
 try:
     with open(RESPONSES_PATH, "r") as f:
         responses = json.load(f)
 except FileNotFoundError:
     st.error("Responses file not found.")
+    st.stop()
+
+try:
+    with open(HOTEL_DATA_PATH, "r") as f:
+        hotel_data = json.load(f)
+except FileNotFoundError:
+    st.error("Hotel data file not found.")
     st.stop()
 
 #! Chatbot reply function
@@ -55,6 +63,7 @@ def chatbot_reply(user_input):
 
 #! Streamlit app
 def main():
+    st.set_page_config(page_title="Hotel FAQ Chatbot", layout="centered")
     st.title("Astra Imperium FAQ Chatbot (Logistic Regression)")
     st.caption("Ask me about room prices, check-in times, or facilities!")
 
@@ -79,7 +88,7 @@ def main():
         # display chatbot reply
         st.session_state.messages.append({"role": "assistant", "content": responses['response']})
         with st.chat_message("assistant"):
-            st.markdown(responses['response'])
+            st.markdown(responses['response'].format(**hotel_data),)
             st.caption(
                 f"**Predicted Intent:** `{responses['intent']}` | "
                 f"**Confidence:** {responses['confidence']*100:.2f}% | "
