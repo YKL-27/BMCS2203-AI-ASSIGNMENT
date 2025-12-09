@@ -1,6 +1,8 @@
 import json
 import joblib
 import os
+import time
+import numpy as np
 import streamlit as st
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -27,12 +29,29 @@ except FileNotFoundError:
 #! Chatbot reply function
 def chatbot_reply(user_input):
     user_input = user_input.lower()
+
+    start_time = time.time()
+
     vec = vectorizer.transform([user_input])
     intent = model.predict(vec)[0]
+
+    # confidence score
+    proba = model.predict_proba(vec)[0]
+    confidence = float(np.max(proba))
+
+    # chatbot response
     response = responses.get(intent, responses.get("unknown_intent"))
     if isinstance(response, list):
         response = response[0]
-    return response
+
+    elapsed = round((time.time() - start_time) * 1000, 2)
+
+    return {
+        "intent": intent,
+        "confidence": confidence,
+        "response": response,
+        "time_ms": elapsed
+    }
 
 #! Streamlit app
 def main():
@@ -57,10 +76,17 @@ def main():
 
         responses = chatbot_reply(prompt)
 
+        reply_text = (
+            f"**Response:** {responses['response']}\n\n"
+            f"**Predicted Intent:** `{responses['intent']}`\n"
+            f"**Confidence:** {responses['confidence']:.3f}\n"
+            f"**Time Taken:** {responses['time_ms']} ms"
+        )
+
         # display chatbot reply
-        st.session_state.messages.append({"role": "assistant", "content": responses})
+        st.session_state.messages.append({"role": "assistant", "content": reply_text})
         with st.chat_message("assistant"):
-            st.markdown(responses)
+            st.markdown(reply_text)
     
     
 if __name__ == '__main__':
