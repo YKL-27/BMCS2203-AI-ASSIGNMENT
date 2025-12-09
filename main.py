@@ -55,7 +55,7 @@ def chatbot_reply(user_input):
 
 #! Streamlit app
 def main():
-    st.title("Chatbot Interface")
+    st.title("Astra Imperium FAQ Chatbot (Logistic Regression)")
     st.caption("Ask me about room prices, check-in times, or facilities!")
 
     # initialize session state
@@ -76,18 +76,15 @@ def main():
 
         responses = chatbot_reply(prompt)
 
-        reply_text = (
-            f"**Response:** {responses['response']}\n\n"
-            f"**Predicted Intent:** `{responses['intent']}`\n"
-            f"**Confidence:** {responses['confidence']:.3f}\n"
-            f"**Time Taken:** {responses['time_ms']} ms"
-        )
-
         # display chatbot reply
-        st.session_state.messages.append({"role": "assistant", "content": reply_text})
+        st.session_state.messages.append({"role": "assistant", "content": responses['response']})
         with st.chat_message("assistant"):
-            st.markdown(reply_text)
-    
+            st.markdown(responses['response'])
+            st.caption(
+                f"**Predicted Intent:** `{responses['intent']}` | "
+                f"**Confidence:** {responses['confidence']*100:.2f}% | "
+                f"**Time Taken:** {responses['time_ms']} ms"
+            )
     
 if __name__ == '__main__':
     main()

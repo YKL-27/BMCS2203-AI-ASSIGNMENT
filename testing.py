@@ -46,7 +46,7 @@ while True:
     if prompt.lower() != ">exit":
         reply = chatbot_reply(prompt)
         print(f"Bot: {reply['response']}\n"
-              f"(Intent: {reply['intent']}, Confidence: {reply['confidence']:.2f}, Time: {reply['time_ms']} ms)")
+              f"(Intent: {reply['intent']}, Confidence: {reply['confidence']*100:.2f}%, Time: {reply['time_ms']} ms)")
     else:
         break
 
