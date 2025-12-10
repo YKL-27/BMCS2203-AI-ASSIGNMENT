@@ -12,13 +12,13 @@ except FileNotFoundError:
 
 #! Load json 
 try:
-    with open("data/responses.json", "r") as f:
+    with open("response/responses.json", "r") as f:
         responses = json.load(f)
 except FileNotFoundError:
     print("Responses file not found.")
     
 try:
-    with open("data/hotel-data.json", "r") as f:
+    with open("response/hotel-data.json", "r") as f:
         hotel_data = json.load(f)
 except FileNotFoundError:
     print("Hotel data file not found.")

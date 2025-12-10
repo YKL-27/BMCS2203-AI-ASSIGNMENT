@@ -4251,7 +4251,7 @@ Smoking booth?,check_smoking_policy
 Tobacco policy?,check_smoking_policy
 Cigarette rules?,check_smoking_policy
 Tobacco policy?,check_smoking_policy
-Can I light up?,check_smoking_policy
+Can I vape?,check_smoking_policy
 Vaping rules?,check_smoking_policy
 E-cig rules?,check_smoking_policy
 Use tobacco?,check_smoking_policy
@@ -4293,7 +4293,7 @@ Entrance smoking?,check_smoking_policy
 Smoking prohibited?,check_smoking_policy
 No smoking sign?,check_smoking_policy
 Strictly no smoke?,check_smoking_policy
-Zero tolerance?,check_smoking_policy
+Vape allowed?,check_smoking_policy
 Smoke alarm?,check_smoking_policy
 Fire hazard?,check_smoking_policy
 Smoking laws?,check_smoking_policy
@@ -4305,7 +4305,7 @@ Usel tobacco?,check_smoking_policy
 Wedd policy?,check_smoking_policy
 hookah?,check_smoking_policy
 Smell of smoke?,check_smoking_policy
-can i smoke?,check_smoking_policy
+smoke ok?,check_smoking_policy
 Is smoking allowed,check_smoking_policy
 Can I smoke in the lobby,check_smoking_policy
 Is the rm smoking?,check_smoking_policy
