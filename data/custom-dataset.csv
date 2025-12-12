@@ -1606,7 +1606,7 @@ Tell me what you can do.,check_functions
 What assistance do you provide?,check_functions
 List your capabilities.,check_functions
 Are you able to help with reservations?,check_functions
-Can you give me hotel info?,check_functions
+Who are you?,check_functions
 What is this bot for?,check_functions
 Guide me through your services.,check_functions
 Guide me through your services immediately.,check_functions
@@ -1677,17 +1677,17 @@ How can you help me if possible.,check_functions
 What are your functions right now.,check_functions
 What are your functions for me.,check_functions
 "Hi, how can you help me?",check_functions
-What are your functions today.,check_functions
+What can you do,check_functions
 What is this bot for please.,check_functions
 What are your functions immediately.,check_functions
-What are your functions if possible.,check_functions
+What is your functions,check_functions
 "Hello, what services do you offer?",check_functions
 "Please tell me, what assistance do you provide?",check_functions
 "I would like to know, Tell me what you can do.",check_functions
 "I'm wondering, Are you able to help with reservations?",check_functions
 What assistance do you provide for me.,check_functions
 What assistance do you provide right now.,check_functions
-List your capabilities today.,check_functions
+Why are you here?,check_functions
 Are you able to help with reservations right now.,check_functions
 How can you help me immediately.,check_functions
 "I would like to know, list your capabilities.",check_functions

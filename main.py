@@ -11,6 +11,8 @@ INTENT_VECTORIZER_PATH = os.path.join(BASE_DIR, "joblib", "intent_vectorizer.job
 RESPONSES_PATH = os.path.join(BASE_DIR, "response", "responses.json")
 HOTEL_DATA_PATH = os.path.join(BASE_DIR, "response", "hotel-data.json")
 
+PROBABILITY_THRESHOLD = 0.5
+
 #! Load model + vectorizer
 try:
     model = joblib.load(INTENT_MODEL_PATH)
@@ -46,6 +48,9 @@ def chatbot_reply(user_input):
     # confidence score
     proba = model.predict_proba(vec)[0]
     confidence = float(np.max(proba))
+    max_proba = proba.max()
+    if max_proba < PROBABILITY_THRESHOLD:
+        intent = "unknown_intent"
 
     # chatbot response
     response = responses.get(intent, responses.get("unknown_intent"))
