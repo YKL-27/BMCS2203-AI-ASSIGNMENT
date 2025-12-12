@@ -3,6 +3,8 @@ import joblib
 import time
 import numpy as np
 
+PROBABILITY_THRESHOLD = 0.5
+
 #! Load model + vectorizer
 try:
     model = joblib.load("joblib/intent_model.joblib")
@@ -30,6 +32,9 @@ def chatbot_reply(user_input):
     vec = vectorizer.transform([user_input])
     intent = model.predict(vec)[0]
     proba = model.predict_proba(vec)[0]
+    max_proba = proba.max()
+    if max_proba < PROBABILITY_THRESHOLD:
+        intent = "unknown_intent"
     confidence = float(np.max(proba))
     response = responses.get(intent, "unknown_intent")
     
