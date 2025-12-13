@@ -1,0 +1,37 @@
+input,expected_intent
+"My flight got rescheduled,can I keep the room for one more day?",add_night
+"I need to secure a spot for the upcoming Merdeka weekend.",book_hotel
+"I'm driving a large SUV,will there be a spot for it?",book_parking_space
+"I'm bringing my Oyen (cat) along,he is small,what are the charges?",bring_pets
+"I have to scrap my trip to London next week.",cancel_hotel_reservation
+"If I pull out of the booking now,how much am I losing?",cancellation_fees
+"Something came up,I need to shift my visit to next month.",change_hotel_reservation
+"We are bringing a 5-year-old,does she need her own bed or can she share?",check_child_policy
+"I'm not sure what you are capable of handling as a bot.",check_functions
+"I need to burn off some Nasi Lemak calories,do you have a treadmill?",check_hotel_facilities
+"Are there any special promos running for the school holidays?",check_hotel_offers
+"What's the damage to my wallet for a night in the Deluxe room?",check_hotel_prices
+"I just want to verify that my booking actually exists.",check_hotel_reservation
+"We just landed at KLIA,how soon can we pick up the keys?",check_in
+"I left my charger in room 304,can someone check?",check_lost_item
+"Can I see the digital menu for the SkyDine restaurant?",check_menu
+"We have a free evening,any nice spots specifically for sightseeing nearby?",check_nearby_attractions
+"We are packing up now,we just need to settle the final bill.",check_out
+"Do you accept TnG eWallet or is it cash only?",check_payment_methods
+"Do you have anything left for tonight,or are you fully booked?",check_room_availability
+"What's the difference between the deluxe and the superior?",check_room_type
+"Is there a designated spot for smoking,or is the whole hotel smoke-free?",check_smoking_policy
+"I'm having a hard time getting the answer I need here.",customer_service
+"The noise level last night was absolutely unacceptable.",file_complaint
+"I haven't seen the money return to my card yet.",get_refund
+"Catch you later then.",goodbye
+"Morning!",greeting
+"I'm looking to organise a workshop for 20 pax,do you have a hall?",host_event
+"I'd prefer to speak to a flesh-and-blood person.",human_agent
+"My company needs a receipt for expense reporting.",invoices
+"I'd love to share some feedback about how great the service was.",leave_review
+"Can I use my loyalty rewards for this stay?",redeem_points
+"Help me find a spot to sleep in downtown KL.",search_hotel
+"What is the price for a private car transfer from the airport?",shuttle_service
+"Our flight isn't until evening,can we drop our bags somewhere?",store_luggage
+"How do I cook Nasi Lemak?",unknown_intent

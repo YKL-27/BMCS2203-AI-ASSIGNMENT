@@ -37,7 +37,7 @@ except FileNotFoundError:
     st.stop()
 
 #! Chatbot reply function
-def chatbot_reply(user_input):
+def predict_intent(user_input):
     user_input = user_input.lower()
 
     start_time = time.time()
@@ -88,7 +88,7 @@ def main():
         with st.chat_message("user"):
             st.markdown(prompt)
 
-        responses = chatbot_reply(prompt)
+        responses = predict_intent(prompt)
 
         # display chatbot reply
         st.session_state.messages.append({"role": "assistant", "content": responses['response']})
